@@ -39,6 +39,9 @@ namespace Mini_project_2__Asset_Tracking_DB.Migrations
                     b.Property<double>("ExchangeRate")
                         .HasColumnType("float");
 
+                    b.Property<double>("ExchangeRateUSD")
+                        .HasColumnType("float");
+
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
@@ -55,8 +58,6 @@ namespace Mini_project_2__Asset_Tracking_DB.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OfficeId");
 
                     b.ToTable("Assets");
 
@@ -88,6 +89,12 @@ namespace Mini_project_2__Asset_Tracking_DB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -108,17 +115,6 @@ namespace Mini_project_2__Asset_Tracking_DB.Migrations
                     b.HasBaseType("Mini_project_2___Asset_Tracking_DB.Asset");
 
                     b.HasDiscriminator().HasValue("Phone");
-                });
-
-            modelBuilder.Entity("Mini_project_2___Asset_Tracking_DB.Asset", b =>
-                {
-                    b.HasOne("Mini_project_2___Asset_Tracking_DB.Office", "Office")
-                        .WithMany()
-                        .HasForeignKey("OfficeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Office");
                 });
 #pragma warning restore 612, 618
         }
